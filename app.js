@@ -18,7 +18,7 @@ var ddoc = module.exports = {'updates':{}, 'views':{}, 'filters':{}}
 
 
 ddoc.validate_doc_update = function(newDoc, oldDoc, userCtx, secObj) {
-  if(~userCtx.roles.indexOf('_admin') && 0)
+  if(~userCtx.roles.indexOf('_admin'))
     return log('Allowing admin update')
 
   if(oldDoc)
