@@ -36,14 +36,14 @@ ddoc.updates.stripe_webhook = function(doc, req) {
   var couch_log = log
   log = debug_log
 
-  var response = {'ok':true}
+  var response = {'ok':true, 'strip':false}
   log('Receive Stripe webhook: ' + req.body)
 
   try        { doc = JSON.parse(req.body) }
   catch (er) { return fail('Bad JSON body: ' + JSON.stringify(req.body)) }
 
-  // Use ?strip=true to strip all information except the Stripe ID.
-  if(req.query.strip) {
+  // Use ?keep=true to disable stripping all information except the ID.
+  if(!req.query.keep) {
     log('Stripping all Stripe data except the event id: ' + doc.id)
     response.strip = true
     doc = {'id':doc.id}
