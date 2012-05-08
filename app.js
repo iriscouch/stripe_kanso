@@ -88,8 +88,11 @@ ddoc.updates.stripe_webhook = function(doc, req) {
 
 ddoc.views.stripe_created = {'reduce':'_count'}
 ddoc.views.stripe_created.map = function(doc) {
-  if(typeof doc.created == 'number')
-    emit(doc.created, 1)
+  if(typeof doc.created != 'number')
+    return
+
+  var created = new Date(doc.created * 1000)
+  emit(created, 1)
 }
 
 
@@ -98,11 +101,12 @@ ddoc.views.stripe_mode_created.map = function(doc) {
   if(typeof doc.created != 'number')
     return
 
-  var data = doc.data || {}
+  var created = new Date(doc.created * 1000)
+    , data = doc.data || {}
     , object = data.object || {}
 
   if('livemode' in object)
-    emit([ !!object.livemode, doc.created ], 1)
+    emit([ !!object.livemode, created ], 1)
 }
 
 //
