@@ -37,7 +37,7 @@ ddoc.updates.stripe_webhook = function(doc, req) {
   log = debug_log
 
   var response = {'ok':true}
-  log('Receive Stripe webhook: ', req.body)
+  log('Receive Stripe webhook: ' + req.body)
 
   try        { doc = JSON.parse(req.body) }
   catch (er) { return fail('Bad JSON body: ' + JSON.stringify(req.body)) }
@@ -51,7 +51,7 @@ ddoc.updates.stripe_webhook = function(doc, req) {
 
   doc._id = doc.id
 
-  log('Stripe webhook doc:', doc)
+  log('Stripe webhook doc:' + JSON.stringify(doc))
   return respond(201)
 
   //
