@@ -1,6 +1,6 @@
 ## Kanso.js support for the Stripe API and webhooks
 
-`stripe_kanso` is a [Kanso] Couch app to work with the Stripe payments system, in particular, the webhooks events.
+`stripe_kanso` is a [Kanso][kanso] Couch app to work with the Stripe payments system, in particular, the webhooks events.
 
 ## Using webhooks
 
@@ -25,3 +25,5 @@ This app includes a few views to dig through events (if you used `?keep=true`).
 ## License
 
 Apache 2.0
+
+[kanso]: http://kan.so
