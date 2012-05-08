@@ -21,6 +21,9 @@ ddoc.validate_doc_update = function(newDoc, oldDoc, userCtx, secObj) {
   if(~userCtx.roles.indexOf('_admin'))
     return log('Allowing admin update')
 
+  if(newDoc._deleted)
+    return log('Allowing deleted document: ' + newDoc._id)
+
   if(oldDoc)
     throw {'forbidden':'Stripe documents may not change'}
 
