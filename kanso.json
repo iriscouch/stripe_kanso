@@ -1,0 +1,6 @@
+{ "name"   : "stripe"
+, "version": "0.1.0"
+, "description": "Kanso and CouchDB support for the Stripe payments API"
+, "dependencies": { "node-couchapp": "~0.9.1" }
+, "app": "app"
+}
