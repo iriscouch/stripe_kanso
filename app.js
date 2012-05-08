@@ -14,7 +14,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-var ddoc = module.exports = {'updates':{}, 'views':{}}
+var ddoc = module.exports = {'updates':{}, 'views':{}, 'filters':{}}
 
 
 ddoc.validate_doc_update = function(newDoc, oldDoc, userCtx, secObj) {
@@ -100,4 +100,20 @@ ddoc.views.stripe_mode_created.map = function(doc) {
 
   if('livemode' in object)
     emit([ !!object.livemode, doc.created ], 1)
+}
+
+//
+// Filters
+//
+
+ddoc.filters.stripe_livemode = function(doc, req) {
+  var data = doc.data || {}
+    , object = data.object || {}
+    , is_live = !! object.livemode
+
+  var want_live = true
+  if(req.query.livemode === false || req.query.livemode == 'false')
+    want_live = false
+
+  return (want_live && is_live) || (!want_live && !is_live)
 }
