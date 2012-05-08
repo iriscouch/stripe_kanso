@@ -8,7 +8,7 @@ Stripe webhooks *can* work directly with CouchDB; however, the `stripe_webhook` 
 
 In your Stripe settings, set the webhook URL:
 
-* Test: `http://user:password@example.iriscouch.com/db/_design/stripe/_update/stripe_webhook?debug=true&keep=true
+* Test: `http://user:password@example.iriscouch.com/db/_design/stripe/_update/stripe_webhook?debug=true&keep=true`
 * Live: `https://user:password@example.iriscouch.com/db/_design/stripe/_update/stripe_webhook`
 
 For security, `stripe_webhook` strips all information from the incoming JSON except the event ID. To keep this data, add `?keep=true` to the URL.
