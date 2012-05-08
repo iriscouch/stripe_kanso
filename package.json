@@ -1,0 +1,8 @@
+{ "name"   : "stripe_kanso"
+, "version": "0.1.0"
+, "description": "Kanso and CouchDB support for the Stripe payments API"
+, "keywords": ["kanso", "stripe"]
+
+, "dependencies": { "kanso": "~0.2.1" }
+, "devDependencies": { "tap": "~0.2.4" }
+}
