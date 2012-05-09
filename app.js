@@ -86,6 +86,15 @@ ddoc.updates.stripe_webhook = function(doc, req) {
 // Maybe some helpful views
 //
 
+ddoc.views.processed = {}
+ddoc.views.processed.map = function(doc) {
+  var messages = doc.messages || []
+  messages.forEach(function(message) {
+    if(message.created_at && message.body)
+      emit(message.created_at, message.body)
+  })
+}
+
 ddoc.views.stripe_created = {'reduce':'_count'}
 ddoc.views.stripe_created.map = function(doc) {
   if(typeof doc.created != 'number')
