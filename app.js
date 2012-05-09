@@ -14,7 +14,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-var ddoc = module.exports = {'updates':{}, 'views':{}, 'filters':{}}
+var ddoc = module.exports = {'updates':{}, 'lists':{}, 'views':{}, 'filters':{}}
 
 
 ddoc.validate_doc_update = function(newDoc, oldDoc, userCtx, secObj) {
@@ -117,6 +117,41 @@ ddoc.views.stripe_mode_created.map = function(doc) {
   if('livemode' in object)
     emit([ !!object.livemode, created ], 1)
 }
+
+//
+// Lists
+//
+
+
+// A nice plaintext log format
+ddoc.lists.stripe_log = function(head, req) {
+  var ddoc = this
+
+  var headers = {'content-type':'text/plain'}
+  if(req.query.dl) {
+    response.headers['content-type'] = 'application/octet-stream';
+    response.headers['content-disposition'] = 'attachment;filename="' + req.query.dl;
+  }
+
+  start({'code':200, 'headers':headers})
+
+  var nl = '\r\n'
+  if(req.query.ds)
+    nl  = '\r\n\r\n' // Double space
+
+  var row, line
+  while(row = getRow()) {
+    line = []
+    if(req.query.trim_event != 'true')
+      line.push(row.id)
+
+    line.push(row.key)
+    line.push(row.value)
+
+    send(line.join(' ') + nl)
+  }
+}
+
 
 //
 // Filters
